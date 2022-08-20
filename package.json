@@ -1,0 +1,18 @@
+{
+  "name": "interview-record",
+  "version": "1.0.0",
+  "description": "record",
+  "main": "index.js",
+  "repository": "git@github.com:Xiexiong-zzm/Interview-record.git",
+  "author": "Alex <2579873098@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "yarn docs:dev",
+    "docs:dev": "vuepress dev docs --temp temp",
+    "docs:build": "vuepress build docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "vuepress": "^1.9.7"
+  }
+}
