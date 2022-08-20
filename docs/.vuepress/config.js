@@ -4,7 +4,7 @@ module.exports = {
     lang: 'zh-CN',
     title: '面试题收集',
     description: '收录了常见的面试题，希望能帮助到你',
-    base: '/interview/',
+    base: './',
     theme: '@vuepress/theme-default',
     themeConfig: {
         displayAllHeaders: true,
