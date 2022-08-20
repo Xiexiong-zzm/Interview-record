@@ -5,6 +5,7 @@ module.exports = {
     title: '面试题收集',
     description: '收录了常见的面试题，希望能帮助到你',
     base: '/Interview-record/',
+    head: [['link', { rel: 'icon', href: '/Interview-record/favicon.ico' }]],
     theme: '@vuepress/theme-default',
     themeConfig: {
         displayAllHeaders: true,
@@ -15,7 +16,7 @@ module.exports = {
             { text: '首页', link: '/' },
             { text: '面试', link: '/md/interview/es6/' },
             { text: '关于', link: '/md/about/' },
-            { text: '仓库', link: '' },
+            { text: '仓库', link: 'https://github.com/Xiexiong-zzm/Interview-record.git' },
         ],
         sidebar: [
             {
@@ -38,7 +39,7 @@ module.exports = {
             {
                 title: '前端常考算法',
                 path: '/md/interview/Algorithms/',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     '/md/interview/Algorithms/',
                 ]
@@ -54,9 +55,17 @@ module.exports = {
             {
                 title: '手撕代码',
                 path: '/md/interview/code-rewrite/',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     '/md/interview/code-rewrite/',
+                ]
+            },
+            {
+                title: '设计模式',
+                path: '/md/interview/design-patterns/',
+                collapsable: true,
+                children: [
+                    '/md/interview/design-patterns/',
                 ]
             }
             
