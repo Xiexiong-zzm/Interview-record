@@ -146,3 +146,22 @@ call和apply的区别是，call接收入参不是数组类型，apply接收的�
       }
     }
 ```
+- 实现深拷贝
+1. 不是复杂对象，比如(函数、Map和Set数据),可直接用JSON.parse(JSON.stringify(obj))
+2. 复杂对象可以考虑工具库lodash或者自己封装一个深拷贝方法
+```javascript
+// 模拟实现深拷贝
+function deepCopy(obj) {
+  // 判断是不是对象,这里obj==null等同于（obj==null||obj==undefined）
+  if(typeof(obj) !== 'object'||obj==null) return obj
+  // 接收拷贝对象
+  let result = null
+  for(let key of obj) {
+    // 保证key不是原型上的属性
+    if(Object.hasOwnProperty.call(obj, key)) {
+      result[key] = deepCopy(obj[key]) // 递归
+    }
+  }
+  return result
+}
+```
