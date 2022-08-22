@@ -8,7 +8,7 @@
     <link rel="icon" href="/Interview-record/Interview-record/favicon.ico">
     <meta name="description" content="收录了常见的面试题，希望能帮助到你">
     
-    <link rel="preload" href="/Interview-record/assets/css/0.styles.60999250.css" as="style"><link rel="preload" href="/Interview-record/assets/js/app.7594b53d.js" as="script"><link rel="preload" href="/Interview-record/assets/js/2.a99d1a26.js" as="script"><link rel="preload" href="/Interview-record/assets/js/15.d2697e76.js" as="script"><link rel="prefetch" href="/Interview-record/assets/js/10.80cbe7d5.js"><link rel="prefetch" href="/Interview-record/assets/js/11.543defdf.js"><link rel="prefetch" href="/Interview-record/assets/js/12.b62c9fe6.js"><link rel="prefetch" href="/Interview-record/assets/js/13.50362215.js"><link rel="prefetch" href="/Interview-record/assets/js/14.1269e082.js"><link rel="prefetch" href="/Interview-record/assets/js/16.cbaf7880.js"><link rel="prefetch" href="/Interview-record/assets/js/17.03ca8f1f.js"><link rel="prefetch" href="/Interview-record/assets/js/18.c0ddfcf8.js"><link rel="prefetch" href="/Interview-record/assets/js/19.74aca5fa.js"><link rel="prefetch" href="/Interview-record/assets/js/3.3b69cd3e.js"><link rel="prefetch" href="/Interview-record/assets/js/4.0250c383.js"><link rel="prefetch" href="/Interview-record/assets/js/5.c5fa22d4.js"><link rel="prefetch" href="/Interview-record/assets/js/6.f45840df.js"><link rel="prefetch" href="/Interview-record/assets/js/7.c9822a43.js"><link rel="prefetch" href="/Interview-record/assets/js/8.f8905adf.js"><link rel="prefetch" href="/Interview-record/assets/js/9.3a143eaa.js">
+    <link rel="preload" href="/Interview-record/assets/css/0.styles.60999250.css" as="style"><link rel="preload" href="/Interview-record/assets/js/app.b7b9b132.js" as="script"><link rel="preload" href="/Interview-record/assets/js/2.a99d1a26.js" as="script"><link rel="preload" href="/Interview-record/assets/js/15.5252d697.js" as="script"><link rel="prefetch" href="/Interview-record/assets/js/10.80cbe7d5.js"><link rel="prefetch" href="/Interview-record/assets/js/11.543defdf.js"><link rel="prefetch" href="/Interview-record/assets/js/12.b62c9fe6.js"><link rel="prefetch" href="/Interview-record/assets/js/13.50362215.js"><link rel="prefetch" href="/Interview-record/assets/js/14.1269e082.js"><link rel="prefetch" href="/Interview-record/assets/js/16.eb879be4.js"><link rel="prefetch" href="/Interview-record/assets/js/17.03ca8f1f.js"><link rel="prefetch" href="/Interview-record/assets/js/18.c0ddfcf8.js"><link rel="prefetch" href="/Interview-record/assets/js/19.74aca5fa.js"><link rel="prefetch" href="/Interview-record/assets/js/3.3b69cd3e.js"><link rel="prefetch" href="/Interview-record/assets/js/4.0250c383.js"><link rel="prefetch" href="/Interview-record/assets/js/5.c5fa22d4.js"><link rel="prefetch" href="/Interview-record/assets/js/6.f45840df.js"><link rel="prefetch" href="/Interview-record/assets/js/7.c9822a43.js"><link rel="prefetch" href="/Interview-record/assets/js/8.f8905adf.js"><link rel="prefetch" href="/Interview-record/assets/js/9.3a143eaa.js">
     <link rel="stylesheet" href="/Interview-record/assets/css/0.styles.60999250.css">
   </head>
   <body>
@@ -136,6 +136,20 @@ call和apply的区别是，call接收入参不是数组类型，apply接收的�
         <span class="token keyword">return</span> <span class="token function">_this</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> args1<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>args2<span class="token punctuation">)</span><span class="token punctuation">)</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
+</code></pre></div><ul><li>实现深拷贝</li></ul> <ol><li>不是复杂对象，比如(函数、Map和Set数据),可直接用JSON.parse(JSON.stringify(obj))</li> <li>复杂对象可以考虑工具库lodash或者自己封装一个深拷贝方法</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// 模拟实现深拷贝</span>
+<span class="token keyword">function</span> <span class="token function">deepCopy</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 判断是不是对象,这里obj==null等同于（obj==null||obj==undefined）</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token string">'object'</span><span class="token operator">||</span>obj<span class="token operator">==</span><span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> obj
+  <span class="token comment">// 接收拷贝对象</span>
+  <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token keyword">null</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">of</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 保证key不是原型上的属性</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      result<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">deepCopy</span><span class="token punctuation">(</span>obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">// 递归</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> result
+<span class="token punctuation">}</span>
 </code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
       ←
       <a href="/Interview-record/md/interview/http/" class="prev">
@@ -145,6 +159,6 @@ call和apply的区别是，call接收入参不是数组类型，apply接收的�
       </a>
       →
     </span></p></div> </main></div><div class="global-ui"></div></div>
-    <script src="/Interview-record/assets/js/app.7594b53d.js" defer></script><script src="/Interview-record/assets/js/2.a99d1a26.js" defer></script><script src="/Interview-record/assets/js/15.d2697e76.js" defer></script>
+    <script src="/Interview-record/assets/js/app.b7b9b132.js" defer></script><script src="/Interview-record/assets/js/2.a99d1a26.js" defer></script><script src="/Interview-record/assets/js/15.5252d697.js" defer></script>
   </body>
 </html>
