@@ -53,11 +53,12 @@ module.exports = {
                 ]
             },
             {
-                title: 'HTTP网络相关',
+                title: '网络相关',
                 path: '/md/interview/http/',
-                collapsable: false,
+                collapsable: true,
                 children: [
                     '/md/interview/http/',
+                    '/md/interview/http/browser.md',
                 ]
             },
             {
