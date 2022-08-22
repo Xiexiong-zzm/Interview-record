@@ -30,6 +30,7 @@ module.exports = {
             {
                 title: 'HTML基础',
                 path: '/md/interview/HTML/',
+                collapsable: true,
                 children: [
                     '/md/interview/HTML/'
                 ]
