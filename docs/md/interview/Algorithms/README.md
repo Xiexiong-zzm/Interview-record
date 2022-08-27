@@ -187,3 +187,40 @@ var newArr = heapSort(arr);
 console.log(newArr);  // [35, 37, 47, 51, 58, 62, 73, 88, 93, 99]
 
 ```
+## 归并排序
+一开始先把数组从中间划分成两个子数组，一直递归地把子数组划分成更小的子数组，直到子数组里面只有一个元素，才开始排序。
+
+```javascript
+function mergeSort(arr) {
+    // 一直拆分到单个元素
+    if(arr.length<=1) return arr
+
+    let mid = Math.floor(arr.length/2)
+    // 确定左右部分
+    let left = arr.slice(0,mid);
+    let right = arr.slice(mid)
+
+    let leftArray = mergeSort(left)
+    let rightArray = mergeSort(right)
+
+    // 合并数组
+    return merge(leftArray,rightArray)
+}
+function merge(left,right) {
+    let res = []
+    if(left.length&&right.length) {
+        if(left[0]<=right[0]) res.push(left.shift())
+        res.push(right.shift())
+    }
+    while(left.length) {
+        res.push(left.shift())
+    }
+
+    while(right.length) {
+        res.push(right.shift())
+    }
+
+    return res
+
+}
+```
