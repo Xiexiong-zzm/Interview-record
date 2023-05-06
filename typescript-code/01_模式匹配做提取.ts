@@ -49,3 +49,45 @@ type StartWithRes = StartWith<'guang dong','guang'>
 type ReplaceStr < Str extends string, From extends string, To extends string> = Str extends `${infer Prefix}${From}${infer Suffix}` ? `${Prefix}${To}${Suffix}` : Str;
 
 type ReplaceStrRes = ReplaceStr<'guang dongliang zai','dongliang','duang'>
+
+// Trim
+// trim right
+type TrimStrRight <Str extends string> = Str extends `${infer Rest}${' ' | '\n' | '\t'}` ? TrimStrRight<Rest> : Str;
+
+type TrimStrRes = TrimStrRight<'guang        '>
+
+// trim left
+type TrimStrLeft<Str extends string> = Str extends `${' ' | '\n' | '\t'}${infer Rest}` ? TrimStrLeft<Rest> : Str;
+
+type TrimLeftResult = TrimStrLeft<'      dong'>;
+
+// trim
+type TrimStr<Str extends string> =TrimStrRight<TrimStrLeft<Str>>;
+
+
+type TrimResult = TrimStr<'      dong   '>;
+
+// 函数
+// GetParameters 参数类型提取
+type GetParameters<Func extends Function> = Func extends (...args: infer Args) => unknown ? Args:never
+
+type ParametersRes = GetParameters<(name:string,age:number) => string>
+
+// GetReturnType 返回值类型提取
+type GetReturnType<Func extends Function> = Func extends (...args:any[]) => infer ReturnType ? ReturnType:never
+type ReturnTypeRes = GetReturnType<() => 'aaa'>
+
+class Dog {
+  name:string;
+  constructor(){
+    this.name= 'dog'
+  }
+
+  hello(this:Dog){
+    return 'hello, I\'m ' + this.name;
+  }
+}
+const dog = new Dog()
+dog.hello()
+
+
